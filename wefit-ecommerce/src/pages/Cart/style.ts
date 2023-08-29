@@ -28,7 +28,6 @@ export const Title = styled.h1`
 
 export const ImgDiv = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
   border-bottom: 1.5px solid #3f3d56;
   width: 100%;
@@ -61,7 +60,7 @@ export const WrapperItens = styled.div`
   gap: 0.5rem;
 
   @media (min-width: 768px) {
-    gap: 1.5rem;
+    gap: 1.3rem;
   }
 `;
 

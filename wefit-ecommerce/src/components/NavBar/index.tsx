@@ -1,7 +1,7 @@
 import { ReactNode, HTMLAttributes } from "react";
 import { useNavigate } from "react-router-dom";
-import Bag from "../../assets/Bag.svg";
 import { CartContainer, CartImg, CartQuantity, CartText, MainContent, Title, Wrapper } from "./style";
+import Bag from "../../assets/Bag.svg";
 
 interface NavBarProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
+import { Center, TryAgain, Wrapper } from "./style";
 import { ProductData } from "../../types/interefaces";
 import Card from "../../components/Cards";
-import { Center, TryAgain, Wrapper } from "./style";
 
 const Home = () => {
   const [products, setProducts] = useState<Array<ProductData>>();
@@ -11,7 +11,7 @@ const Home = () => {
 
   const fetchProducts = async () => {
     setError(false);
-    setLoading(true)
+    setLoading(true);
 
     try {
       const response = await fetch("http://localhost:5000/products");

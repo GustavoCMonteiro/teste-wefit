@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FinishDiv,
   ImgDiv,
@@ -14,10 +15,11 @@ import {
   WrapperCart,
   WrapperItens,
 } from "./style";
-import { useNavigate } from "react-router-dom";
+
 import Empty from "../../assets/empty.svg";
 import Button from "../../components/Button";
 import CartItem from "../../components/CartItem";
+
 const Cart = () => {
   const [array, setArray] = useState(true);
   const navigate = useNavigate();
@@ -35,9 +37,9 @@ const Cart = () => {
       <Wrapper>
         <Title>Parece que não há nada por aqui :(</Title>
         <ImgDiv>
-          <img src={Empty} alt="" />
+          <img src={Empty} alt="imagem de carrinho vazio" />
         </ImgDiv>
-        <Button onClick={handleClickHome} text="Voltar" width="small" />
+        <Button onClick={handleClickHome} text="Voltar" size="small" />
       </Wrapper>
     );
   }
@@ -47,7 +49,7 @@ const Cart = () => {
       <WrapperItens>
         <TitlesDiv>
           <TitleProduct>Protudo</TitleProduct>
-          <TitleQtd>QTD</TitleQtd>
+          <TitleQtd>Qtd</TitleQtd>
           <TitleSubtotal>Subtotal</TitleSubtotal>
         </TitlesDiv>
 
@@ -59,7 +61,8 @@ const Cart = () => {
           <TotalText>Total</TotalText>
           <Price>R$ 10,99</Price>
         </TotalDiv>
-        <Button onClick={handleClickPurchase} text="Finalizar Pedido" width="large" />
+
+        <Button onClick={handleClickPurchase} text="Finalizar Pedido" size="large" />
       </FinishDiv>
     </WrapperCart>
   );

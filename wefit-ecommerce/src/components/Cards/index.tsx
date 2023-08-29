@@ -1,6 +1,6 @@
+import { Wrapper, MovieImg, Price, Title } from "./style";
 import { ProductData } from "../../types/interefaces";
 import Button from "../Button";
-import { Wrapper, MovieImg, Price, Title } from "./style";
 
 interface ProductProps {
   product: ProductData;
@@ -12,7 +12,7 @@ const Card = ({ product }: ProductProps) => {
       <MovieImg src={product.image} alt="" />
       <Title>{product.title}</Title>
       <Price>R$ {product.price.toFixed(2)}</Price>
-      <Button text="Adicionar no Carrinho" type="Cart"/>
+      <Button text="Adicionar no Carrinho" variant="Cart"/>
     </Wrapper>
   );
 };

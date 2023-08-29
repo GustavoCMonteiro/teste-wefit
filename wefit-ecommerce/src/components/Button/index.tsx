@@ -1,18 +1,19 @@
 import { Btn, BtnLarge, BtnSmall, BtnText, BtnTextLarge, CartContainer, CartQuantity } from "./style";
+import { ButtonHTMLAttributes } from "react";
 import Cart from "../../assets/Cart.svg";
 
-interface ButtonProps {
-  type?: "Cart";
-  width?: "small" | "large";
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "Cart";
+  size?: "small" | "large";
   text: string;
   onClick?: () => void;
 }
-const Button = ({ type, width, text, onClick }: ButtonProps) => {
-  if (type === "Cart") {
+const Button = ({ variant, size, text, onClick }: ButtonProps) => {
+  if (variant === "Cart") {
     return (
       <Btn onClick={onClick}>
         <CartContainer>
-          <img src={Cart} alt="" />
+          <img src={Cart} alt="icone de carrinho" />
           <CartQuantity>0</CartQuantity>
         </CartContainer>
         <BtnText>{text}</BtnText>
@@ -20,7 +21,7 @@ const Button = ({ type, width, text, onClick }: ButtonProps) => {
     );
   }
 
-  if (width === "small") {
+  if (size === "small") {
     return (
       <BtnSmall onClick={onClick}>
         <BtnTextLarge>{text}</BtnTextLarge>
@@ -28,7 +29,7 @@ const Button = ({ type, width, text, onClick }: ButtonProps) => {
     );
   }
 
-  if (width === "large") {
+  if (size === "large") {
     return (
       <BtnLarge onClick={onClick}>
         <BtnTextLarge>{text}</BtnTextLarge>
@@ -37,7 +38,7 @@ const Button = ({ type, width, text, onClick }: ButtonProps) => {
   }
 
   return (
-    <button>
+    <button onClick={onClick}>
       <BtnText>{text}</BtnText>
     </button>
   );
