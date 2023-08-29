@@ -7,14 +7,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "small" | "large";
   text: string;
   onClick?: () => void;
+  quantity?: number;
 }
-const Button = ({ variant, size, text, onClick }: ButtonProps) => {
+const Button = ({ variant, size, text, onClick, quantity }: ButtonProps) => {
   if (variant === "Cart") {
     return (
-      <Btn onClick={onClick}>
+      <Btn onClick={onClick} $quantity={quantity}>
         <CartContainer>
           <img src={Cart} alt="icone de carrinho" />
-          <CartQuantity>0</CartQuantity>
+          <CartQuantity>{quantity}</CartQuantity>
         </CartContainer>
         <BtnText>{text}</BtnText>
       </Btn>

@@ -1,20 +1,25 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const Btn = styled.button`
+type BtnProps = {
+  $quantity?: number;
+  onClick?: () => void;
+};
+
+export const Btn = styled.button<BtnProps>`
   display: grid;
   grid-template-columns: 25px 1fr;
   gap: 0.5rem;
-  background-color: ${theme.bg.secondary};
   color: ${theme.text.default};
   padding: 0.688rem 4rem;
   border-radius: 0.25rem;
   width: 100%;
   border: none;
   cursor: pointer;
+  background-color: ${({ $quantity }) => ($quantity && $quantity > 0 ? theme.bg.tertiary : theme.bg.secondary)};
 
   &:hover {
-    background-color: #008cdd;
+    background-color: ${({ $quantity }) => ($quantity && $quantity > 0 ? "#027c00" : "#008cdd")};
     transition: 0.3s;
   }
 
