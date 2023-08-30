@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FinishDiv,
@@ -15,13 +15,16 @@ import {
   WrapperCart,
   WrapperItens,
 } from "./style";
+import { GlobalContext } from "../../components/GlobalContext";
 
 import Empty from "../../assets/empty.svg";
 import Button from "../../components/Button";
 import CartItem from "../../components/CartItem";
+import { ProductData } from "../../types/interefaces";
 
 const Cart = () => {
-  const [array, setArray] = useState(true);
+  const global = useContext(GlobalContext);
+  const [array, setArray] = useState<ProductData[]>([]);
   const navigate = useNavigate();
 
   const handleClickHome = () => {
@@ -29,10 +32,19 @@ const Cart = () => {
   };
 
   const handleClickPurchase = () => {
+    localStorage.removeItem("cart");
+    global?.setCartList([]);
     navigate("/purchase");
   };
 
-  if (!array) {
+  useEffect(() => {
+    const data = localStorage.getItem("cart");
+    if (data) {
+      setArray(JSON.parse(data));
+    }
+  }, []);
+
+  if (array.length === 0) {
     return (
       <Wrapper>
         <Title>Parece que não há nada por aqui :(</Title>
@@ -53,7 +65,9 @@ const Cart = () => {
           <TitleSubtotal>Subtotal</TitleSubtotal>
         </TitlesDiv>
 
-        <CartItem />
+        {array.map((product) => (
+          <CartItem key={product.id} product={product} />
+        ))}
       </WrapperItens>
 
       <FinishDiv>

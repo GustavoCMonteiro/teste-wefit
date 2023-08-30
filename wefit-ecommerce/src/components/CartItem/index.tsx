@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Img,
   Title,
@@ -12,25 +12,56 @@ import {
   QuantityButton,
   TitleDiv,
 } from "./style";
+import { ProductData } from "../../types/interefaces";
+import { GlobalContext } from "../../components/GlobalContext";
 import remove from "../../assets/remove.svg";
 import plus from "../../assets/plus.svg";
 import minus from "../../assets/minus.svg";
-const CartItem = () => {
+
+interface ProductProps {
+  product: ProductData;
+}
+const CartItem = ({ product }: ProductProps) => {
+  const global = useContext(GlobalContext);
   const [quantity, setQuantity] = useState(1);
+
+  const handleLocalQuantity = (newQuantity: number) => {
+    console.log("Updating quantity in local storage");
+
+    global?.setCartList((prevCartList) =>
+      prevCartList.map((item) => (item.id === product.id ? { ...item, quantity: newQuantity } : item))
+    );
+  };
+
+  const handleAddQuantity = () => {
+    setQuantity(quantity + 1);
+    handleLocalQuantity(quantity + 1);
+  };
+
+  const handleRemoveQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+      handleLocalQuantity(quantity - 1);
+    }
+  };
+
+  useEffect(() => {
+    setQuantity(product.quantity);
+  }, [product.quantity]);
 
   return (
     <Wrapper>
-      <Img src="https://wefit-react-web-test.s3.amazonaws.com/viuva-negra.png" alt="" />
+      <Img src={product.image} alt="" />
 
       <TitleDiv>
-        <Title>Homem Aranha</Title>
-        <Price>R$ 10,99</Price>
+        <Title>{product.title}</Title>
+        <Price>R$ {product.price.toFixed(2)}</Price>
       </TitleDiv>
 
       <QuantityDiv>
         <QuantityButton
           onClick={() => {
-            quantity > 1 && setQuantity(quantity - 1);
+            handleRemoveQuantity();
           }}
         >
           <img src={minus} alt="botão para remover item do carrinho"></img>
@@ -38,7 +69,7 @@ const CartItem = () => {
         <Quantity>{quantity}</Quantity>
         <QuantityButton
           onClick={() => {
-            setQuantity(quantity + 1);
+            handleAddQuantity();
           }}
         >
           <img src={plus} alt="botão para remover item do carrinho"></img>
@@ -47,9 +78,9 @@ const CartItem = () => {
 
       <Subtotal>
         <SubtotalText>Subtotal</SubtotalText>
-        <Price>R$ 10,99</Price>
+        <Price>R$ {(quantity * product.price).toFixed(2)}</Price>
       </Subtotal>
-      
+
       <RemoveButton>
         <img src={remove} alt="botão para remover item do carrinho"></img>
       </RemoveButton>
