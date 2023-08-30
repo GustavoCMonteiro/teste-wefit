@@ -3,10 +3,10 @@ import theme from "../../styles/theme";
 
 export const Wrapper = styled.div`
   display: grid;
-  column-gap: 0.5rem;
 
   @media (min-width: 768px) {
     grid-template-columns: minmax(120px, 1fr) minmax(300px, 1fr) 150px 100px minmax(15px, 1fr);
+    column-gap: 0.5rem;
     align-items: center;
   }
 `;
@@ -24,7 +24,9 @@ export const Img = styled.img`
 export const TitleDiv = styled.div`
   display: flex;
   gap: 0.5rem;
-  grid-area: 1/2/1/4;
+  grid-area: 1/2/1/5;
+  align-items: center;
+  max-width: 200px;
 
   @media (min-width: 768px) {
     display: block;
@@ -33,7 +35,7 @@ export const TitleDiv = styled.div`
 `;
 
 export const Title = styled.h1`
-  flex-basis: 120px;
+  flex-basis: 115px;
   color: ${theme.text.tertiary};
   font-size: 0.875rem;
   font-weight: 700;
@@ -45,6 +47,11 @@ export const Price = styled.p`
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.375rem;
+  text-align: end;
+
+  @media (min-width: 768px) {
+    text-align: start;
+  }
 `;
 
 export const QuantityDiv = styled.div`
@@ -98,7 +105,10 @@ export const SubtotalText = styled.p`
   }
 `;
 
-export const RemoveButton = styled.div`
+export const RemoveButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
   justify-self: end;
   grid-area: 1/4/2/5;
 

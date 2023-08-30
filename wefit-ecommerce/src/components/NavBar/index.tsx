@@ -1,12 +1,15 @@
-import { ReactNode, HTMLAttributes } from "react";
+import { ReactNode, HTMLAttributes, useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContainer, CartImg, CartQuantity, CartText, MainContent, Title, Wrapper } from "./style";
+import { GlobalContext } from "../../components/GlobalContext";
 import Bag from "../../assets/Bag.svg";
 
 interface NavBarProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 const NavBar = ({ children }: NavBarProps) => {
+  const global = useContext(GlobalContext);
+  const [cartQuantity, setCartQuantity] = useState(0);
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
@@ -17,6 +20,12 @@ const NavBar = ({ children }: NavBarProps) => {
     navigate("/cart");
   };
 
+  useEffect(() => {
+    if (global) {
+      setCartQuantity(global.cartQuantity);
+    }
+  }, [global]);
+
   return (
     <>
       <Wrapper>
@@ -24,7 +33,7 @@ const NavBar = ({ children }: NavBarProps) => {
         <CartContainer onClick={() => handleCartClick()}>
           <div>
             <CartText>Meu Carrinho</CartText>
-            <CartQuantity>0 itens</CartQuantity>
+            <CartQuantity>{cartQuantity} itens</CartQuantity>
           </div>
           <div>
             <CartImg src={Bag} alt="imagem de um carrinho" />

@@ -25,6 +25,7 @@ import { ProductData } from "../../types/interefaces";
 const Cart = () => {
   const global = useContext(GlobalContext);
   const [array, setArray] = useState<ProductData[]>([]);
+  const [total, setTotal] = useState<number>(0);
   const navigate = useNavigate();
 
   const handleClickHome = () => {
@@ -38,11 +39,11 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    const data = localStorage.getItem("cart");
-    if (data) {
-      setArray(JSON.parse(data));
+    if (global) {
+      setTotal(global.totalValue);
+      setArray(global.cartList);
     }
-  }, []);
+  }, [global]);
 
   if (array.length === 0) {
     return (
@@ -73,7 +74,7 @@ const Cart = () => {
       <FinishDiv>
         <TotalDiv>
           <TotalText>Total</TotalText>
-          <Price>R$ 10,99</Price>
+          <Price>R$ {total.toFixed(2)}</Price>
         </TotalDiv>
 
         <Button onClick={handleClickPurchase} text="Finalizar Pedido" size="large" />

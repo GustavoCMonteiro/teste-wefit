@@ -26,11 +26,13 @@ const CartItem = ({ product }: ProductProps) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleLocalQuantity = (newQuantity: number) => {
-    console.log("Updating quantity in local storage");
-
     global?.setCartList((prevCartList) =>
       prevCartList.map((item) => (item.id === product.id ? { ...item, quantity: newQuantity } : item))
     );
+  };
+
+  const handleDelete = (id: number) => {
+    global?.setCartList((prevCartList) => prevCartList.filter((item) => item.id !== id));
   };
 
   const handleAddQuantity = () => {
@@ -81,7 +83,7 @@ const CartItem = ({ product }: ProductProps) => {
         <Price>R$ {(quantity * product.price).toFixed(2)}</Price>
       </Subtotal>
 
-      <RemoveButton>
+      <RemoveButton onClick={() => handleDelete(product.id)}>
         <img src={remove} alt="botão para remover item do carrinho"></img>
       </RemoveButton>
     </Wrapper>
