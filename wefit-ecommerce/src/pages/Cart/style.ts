@@ -54,7 +54,7 @@ export const WrapperCart = styled.div`
   }
 `;
 
-export const WrapperItens = styled.div`
+export const WrapperItens = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

@@ -59,13 +59,13 @@ const Cart = () => {
 
   return (
     <WrapperCart>
+      <TitlesDiv>
+        <TitleProduct>Protudo</TitleProduct>
+        <TitleQtd>Qtd</TitleQtd>
+        <TitleSubtotal>Subtotal</TitleSubtotal>
+      </TitlesDiv>
+      
       <WrapperItens>
-        <TitlesDiv>
-          <TitleProduct>Protudo</TitleProduct>
-          <TitleQtd>Qtd</TitleQtd>
-          <TitleSubtotal>Subtotal</TitleSubtotal>
-        </TitlesDiv>
-
         {array.map((product) => (
           <CartItem key={product.id} product={product} />
         ))}

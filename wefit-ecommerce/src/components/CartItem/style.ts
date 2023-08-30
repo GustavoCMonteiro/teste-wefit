@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.li`
   display: grid;
 
   @media (min-width: 768px) {
