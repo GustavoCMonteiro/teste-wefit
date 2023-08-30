@@ -50,7 +50,12 @@ const Card = ({ product }: ProductProps) => {
       <MovieImg src={product.image} alt="" />
       <Title>{product.title}</Title>
       <Price>R$ {product.price.toFixed(2)}</Price>
-      <Button onClick={addToCart} text="Adicionar no Carrinho" variant="Cart" quantity={quantity} />
+      <Button
+        onClick={addToCart}
+        text={quantity === 0 ? "Adicionar no Carrinho" : "Item Adicionado"}
+        variant="Cart"
+        quantity={quantity}
+      />
     </Wrapper>
   );
 };
